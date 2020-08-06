@@ -26,7 +26,7 @@ function Board() {
             }
             
         });
-    }, []);
+    }, [id]);
 
     return (
         <div>

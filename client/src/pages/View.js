@@ -26,7 +26,7 @@ function View() {
             }
             
         });
-    }, []);
+    }, [id]);
 
     return (
         <div>

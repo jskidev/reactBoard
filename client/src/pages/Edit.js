@@ -58,7 +58,7 @@ function Edit() {
             }
             
         });
-    }, []);
+    }, [id]);
 
     return (
         <div>

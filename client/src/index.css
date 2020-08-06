@@ -3,4 +3,5 @@
 body, html {
   margin: 0;
   font-family: 'Mulish', sans-serif;
+  overflow-x: hidden;
 }
