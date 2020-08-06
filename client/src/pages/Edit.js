@@ -16,7 +16,8 @@ function Edit() {
         event.preventDefault();
         axios({
             method: 'post',
-            url: 'http://localhost:8000/api/edit/'+id,
+            url: 'http://localhost:8000/api/edit/'+id, //DEVELOPMENT
+            //url: window.location.origin+'/api/edit/'+id  //PRODUCTION
             data: {
               boardName: boardName,
               boardDescription: boardDescription,
@@ -36,7 +37,8 @@ function Edit() {
     }
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/view/'+id)
+        fetch('http://localhost:8000/api/view/'+id) //DEVELOPMENT
+        //fetch(window.location.origin+'/api/view/'+id) //PRODUCTION
         .then(async res => {
             //console.log(res);
             return await res.json()

@@ -9,6 +9,7 @@ const ObjectId = require('mongodb').ObjectID;
 const uri = "mongodb+srv://"+CONNECTION+":"+CONNECTION2+"@cluster0.jdz5p.mongodb.net/"+CONNECTION3+"?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 var router = express.Router();
+client.connect();
 
 router.post('/api/create', async function(req, res) {
     const id = uuidv4();
@@ -16,11 +17,10 @@ router.post('/api/create', async function(req, res) {
     if(req.body['participants'].length){
         for(var i = 0 ; i < req.body['participants'].length ; i ++){
             req.body['participants'][i].name = sanitizeString(req.body['participants'][i].name);
-            req.body['participants'][i].score = sanitizeString(req.body['participants'][i].score);
+            req.body['participants'][i].score = sanitizeString(req.body['participants'][i].score.toString());
         }
     }
-    console.log(req.body);
-    await client.connect();
+    //await client.connect();
     const db = client.db("leadtheboard");
     const col = db.collection("boards");
     let docToInsert = {
@@ -37,7 +37,7 @@ router.post('/api/create', async function(req, res) {
 })
 
 router.get('/api/view/:id', async function(req, res) {
-    await client.connect();
+    //await client.connect();
     const db = client.db("leadtheboard");
     const col = db.collection("boards");
     const myDoc = await col.find({"id":req.params.id}).toArray(function(err, documents) {
@@ -47,7 +47,7 @@ router.get('/api/view/:id', async function(req, res) {
 });
 
 router.post('/api/edit/:id', async (req, res) => {
-    await client.connect();
+    //await client.connect();
     const db = client.db("leadtheboard");
     const col = db.collection("boards");
     if(req.body['participants'].length){
@@ -57,7 +57,6 @@ router.post('/api/edit/:id', async (req, res) => {
         }
     }
     var o_id = new ObjectId.ObjectID(req.body.id);
-    console.log(req.body)
     const myDoc = await col.updateOne(
         {'_id': o_id}, 
         {
@@ -66,7 +65,16 @@ router.post('/api/edit/:id', async (req, res) => {
         ).then(result=>{
             res.json(result);
     })
-    
+});
+
+router.get('/api/board/:id', async function(req, res) {
+    //await client.connect();
+    const db = client.db("leadtheboard");
+    const col = db.collection("boards");
+    const myDoc = await col.find({"sid":req.params.id}).toArray(function(err, documents) {
+        if (err) throw error;
+        res.json(documents);
+    });
 });
 
 function sanitizeString(str){

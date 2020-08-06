@@ -26,7 +26,8 @@ class Create extends React.Component {
         event.preventDefault();
         axios({
             method: 'post',
-            url: 'http://localhost:8000/api/create',
+            url: 'http://localhost:8000/api/create',    //DEVELOPMENT
+            //url: window.location.origin+'/api/create',  //PRODUCTION
             data: {
               boardName: this.state['boardName'],
               boardDescription: this.state['boardDescription'],
@@ -34,7 +35,6 @@ class Create extends React.Component {
             }
           })
         .then(function (response) {
-            //console.log(response);
             window.location = window.location.origin+'/view/'+response.data.ops[0].id
         })
         .catch(function (error) {
