@@ -1,10 +1,11 @@
 import React from 'react';
 import '../App.css';
 import logo from '../images/bannerImage.svg';
-import { motion } from "framer-motion"
+import { motion, useViewportScroll } from "framer-motion"
 
 function Home() {
   return (
+    <div>
     <div className="homeBanner">
       <motion.div animate={{ translateX: [-150, 0] }} transition={{ ease: "easeOut", duration: 2 }} className="homeBannerLeft">
         <h1>LeadTheBoard</h1>
@@ -18,6 +19,37 @@ function Home() {
       <motion.div animate={{ translateX: [150, 0] }} transition={{ ease: "easeOut", duration: 2 }} className="homeBannerRight">
         <img src={logo} />
       </motion.div>
+    </div>
+    <div className="panel">
+      <div className="panelContent">
+        <h3>
+          Create
+        </h3>
+        <p>
+          Create a free leaderboard in seconds.
+        </p>
+      </div>
+    </div>
+    <div className="panelInverse">
+      <div className="panelContent">
+        <h3>
+          Edit
+        </h3>
+        <p>
+          Edit your leaderboard at any time.
+        </p>
+      </div>
+    </div>
+    <div className="panel">
+      <div className="panelContent">
+        <h3>
+          Share
+        </h3>
+        <p>
+          Share your leaderboard with anybody.
+        </p>
+      </div>
+    </div>
     </div>
   );
 }

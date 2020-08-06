@@ -93,3 +93,23 @@ nav a:visited {
 .primaryButton:focus {
   outline: none;
 }
+
+.panel {
+  padding: 5rem 2rem;
+  background-color: rgba(120, 86, 255, 0.5);
+  color: #FFFFFF;
+}
+
+.panelInverse {
+  padding: 5rem 2rem;
+  background-color: #FFFFFF;
+  text-align: right;
+}
+
+.panelContent {
+  padding: 0rem 5rem;
+}
+
+.panelContent h3{
+  font-size: 1.5rem;
+}
