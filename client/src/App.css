@@ -96,24 +96,47 @@ nav a:visited {
   outline: none;
 }
 
-.panel {
-  padding: 7rem 2rem;
-  background-color: rgba(120, 86, 255, 0.5);
-  color: #FFFFFF;
+.panelLeft {
+  display: flex;
+  margin: auto;
+  max-width: 70%;
 }
 
-.panelInverse {
-  padding: 7rem 2rem;
-  background-color: #FFFFFF;
-  text-align: right;
+.panelMid {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 70%;
+}
+
+.panelRight {
+  display: flex;
+  flex-direction: row-reverse;
+  max-width: 70%;
+  margin: auto;
 }
 
 .panelContent {
-  padding: 0rem 5rem;
+  padding: 5rem 2rem;
+  width: 350px;
+  display: flex;
 }
 
 .panelContent h3{
   font-size: 1.5rem;
+  margin-top: 0;
+}
+
+.panelContent .panelIcon{
+  position: relative;
+  top: -5px;
+  margin-right: 10px;
+}
+
+.panelContent .panelIconShare{
+  position: relative;
+  top: -7px;
+  margin-right: 10px;
 }
 
 .panelContent {
@@ -197,6 +220,8 @@ nav a:visited {
   padding: 0rem 2rem 0rem 2rem;
 }
 
+/*MEDIA QUERIES*/
+/*WIDTH*/
 @media only screen and (max-width: 1300px) {
   .homeBannerRight img {
     width: 100%;
@@ -231,6 +256,19 @@ nav a:visited {
 @media only screen and (max-width: 600px) {
   .homeBannerLeft {
     padding: 0rem 1rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .panelLeft, .panelMid, .panelRight {
+    max-width: 90%;
+  }
+  .panelLeft h3, .panelMid h3, .panelRight h3 {
+    font-size: 1.3rem;
+  }
+  .panelContent {
+    width: 100%;
+    padding: 2rem;
   }
 }
 

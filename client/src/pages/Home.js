@@ -11,12 +11,13 @@ function Home() {
 
   const handleScroll = () => {
     const currentScrollPos = window.pageYOffset;
-    setpanel1Visible(panel1Visible ? true : currentScrollPos > 80);
-    setpanel2Visible(panel2Visible ? true : currentScrollPos > 390);
-    setpanel3Visible(panel3Visible ? true : currentScrollPos > 700);
+    setpanel1Visible(panel1Visible ? true : currentScrollPos > 240);
+    setpanel2Visible(panel2Visible ? true : currentScrollPos > 580);
+    setpanel3Visible(panel3Visible ? true : currentScrollPos > 920);
   };
 
   useEffect(() => {
+    handleScroll(); //Fire function on page load. Will show elements if user refreshes page below the fold.
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
@@ -41,47 +42,71 @@ function Home() {
             </motion.button>
           </motion.div>
           <motion.div animate={{ translateX: [150, 0], opacity: [0, 1] }} transition={{ ease: "easeOut", duration: 2 }} className="homeBannerRight">
-            <img alt="Woman in front of leaderboard" src={logo} />
+            <img alt="" src={logo} />
           </motion.div>
         </div>
-        <div className="panelHeader">
-        <h3>
-          How it works
-        </h3>
-        <a href="#HowItWorks"><img alt="Down Arrow" src={arrow} width="30px"/></a>
-    </div>
+        <motion.div animate={{ translateY: [75, 0], opacity: [0, 1] }} transition={{ ease: "easeOut", delay: 3, duration: 1 }} className="panelHeader">
+          <h3>
+            How it works
+          </h3>
+          <a href="#HowItWorks"><img alt="Down Arrow" src={arrow} width="30px"/></a>
+        </motion.div>
     </div>
     
     
-    <div className="panel">
+    <div className="panelLeft">
       <a name="HowItWorks"></a>
       <div className={panel1Visible ? 'panelContent easeInLeft' : 'panelContent'}>
-        <h3>
-          Create
-        </h3>
-        <p>
-          Create a free leaderboard in seconds.
-        </p>
+        <div className="panelIcon">
+          <svg height="40" viewBox="0 0 21 21" width="40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#7856FF" stroke-linecap="round" stroke-linejoin="round" transform="translate(2 3)"><path d="m8 16c4.4380025 0 8-3.5262833 8-7.96428571 0-4.43800246-3.5619975-8.03571429-8-8.03571429-4.43800245 0-8 3.59771183-8 8.03571429 0 4.43800241 3.56199755 7.96428571 8 7.96428571z"/><path d="m4 8h8"/><path d="m8 12.0563492v-8.0563492z"/></g></svg>
+        </div>
+        <div>
+          <h3>
+            Create
+          </h3>
+          <h4>
+            Create a free online leaderboard in seconds.
+          </h4>
+          <p>
+            No app installation required. Simply enter a name and description for your board and any starting participants and scores.
+          </p>
+        </div>
       </div>
     </div>
-    <div className="panelInverse">
-      <div className={panel2Visible ? 'panelContent easeInRight' : 'panelContent'}>
-        <h3>
-          Edit
-        </h3>
-        <p>
-          Edit your leaderboard at any time.
-        </p>
+    <div className="panelMid">
+      <div className={panel2Visible ? 'panelContent easeInLeft' : 'panelContent'}>
+        <div className="panelIcon">
+        <svg height="40" viewBox="0 0 21 21" width="40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#7856FF" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 2)"><path d="m7 2.5h-4.5c-1.1045695 0-2 .8954305-2 2v9.0003682c0 1.1045695.8954305 2 2 2h10c1.1045695 0 2-.8954305 2-2v-4.5003682"/><path d="m9.49086518-.60570641c.79784342.01307433 1.43777452.66357797 1.43777452 1.46152846v9.87574095l-1.41421359 2.8284271-1.41421356-2.8284271-.04115759-9.92287518c-.00322702-.77801908.62486604-1.41134419 1.40288513-1.41457122.00964205-.00003999.01928425.00001901.02892509.00017699z" transform="matrix(.70710678 .70710678 -.70710678 .70710678 7.360659 -4.816202)"/><path d="m12.5 3.5.953 1"/></g></svg>
+        </div>
+        <div>
+          <h3>
+            Edit
+          </h3>
+          <h4>
+            Edit your leaderboard at any time.
+          </h4>
+          <p>
+            Edit any part of your board and have your updates available instantly to everyone viewing your board.
+          </p>
+        </div>
       </div>
     </div>
-    <div className="panel">
+    <div className="panelRight">
       <div className={panel3Visible ? 'panelContent easeInLeft' : 'panelContent'}>
-        <h3>
-          Share
-        </h3>
-        <p>
-          Share your leaderboard with anybody.
-        </p>
+        <div className="panelIconShare">
+        <svg height="40" viewBox="0 0 21 21" width="40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#7856FF" stroke-linecap="round" stroke-linejoin="round" transform="translate(3 3)"><path d="m10.326 1.666.016 5.641-5.673.016" transform="matrix(.70710678 -.70710678 -.70710678 -.70710678 5.376348 12.979652)"/><path d="m7.522.521v11.979"/><path d="m4.5 7.5h-2c-1.1045695 0-2 .8954305-2 2v4c0 1.1045695.8954305 2 2 2h10c1.1045695 0 2-.8954305 2-2v-4c0-1.1045695-.8954305-2-2-2h-2"/></g></svg>
+        </div>
+        <div>
+          <h3>
+            Share
+          </h3>
+          <h4>
+            Share your leaderboard with anybody.
+          </h4>
+          <p>
+            Send your shareable or admin link to allow participants to view your board, and admins to edit your board.
+          </p>
+        </div>
       </div>
     </div>
     </div>
