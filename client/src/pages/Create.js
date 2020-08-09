@@ -96,7 +96,7 @@ class Create extends React.Component {
                         )
                     }
                     <button type="button" onClick={this.addParticipant}>Add Participant</button>
-                    <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} type="submit" value="Submit">Submit </motion.button>
+                    <button type="submit" value="Submit">Submit </button>
                 </form>
             </>
         );

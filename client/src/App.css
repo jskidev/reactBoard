@@ -51,7 +51,8 @@ nav a:visited {
 
 .homeBanner {
   display: flex;
-  padding: 10rem 2rem;
+  padding: 10rem 0rem;
+  flex-grow: 0.95;
 }
 
 .homeBannerLeft {
@@ -152,5 +153,140 @@ nav a:visited {
   to {
     transform: translateX(0px);
     opacity: 100;
+  }
+}
+
+.panelHeader {
+  text-align: center;
+  position: relative;
+  top: -75px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.panelHeader h3 {
+  font-weight: 400;
+  width: 100%;
+}
+
+.panelHeader img {
+  animation-duration: 3s;
+  animation-name: arrowDown;
+  animation-iteration-count:infinite;
+}
+
+@keyframes arrowDown {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.bannerWrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 2rem 0rem 2rem;
+}
+
+@media only screen and (max-width: 1300px) {
+  .homeBannerRight img {
+    width: 100%;
+  }
+  .homeBannerLeft h2 {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .homeBannerRight {
+    display: none;
+  }
+  .homeBannerLeft {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 875px) {
+  .homeBannerLeft {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  nav ul {
+    padding: 2rem 0rem;
+    text-align: right;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .homeBannerLeft {
+    padding: 0rem 1rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .homeBannerLeft h1 {
+    font-size: 1.75em;
+  }
+  .homeBannerLeft h2 {
+    font-size: 1.25em;
+  }
+  .panelHeader h3 {
+    font-size: 0.8em;
+  }
+  nav {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  nav a {
+    padding: 2rem 1rem;
+  }
+  nav span p {
+    padding: 2rem 1rem;
+  }
+}
+
+/*HEIGHT*/
+@media only screen and (max-height: 1100px) {
+  .homeBanner {
+    flex-grow: 0.90;
+  }
+}
+
+@media only screen and (max-height: 950px) {
+  .homeBanner {
+    flex-grow: 0.80;
+  }
+}
+
+@media only screen and (max-height: 780px) {
+  .homeBanner {
+    padding: 4rem 0rem;
+    flex-grow: 0.80;
+  }
+}
+
+@media only screen and (max-height: 615px) {
+  .homeBanner {
+    padding: 2rem 0rem;
+    flex-grow: 0.80;
+  }
+}
+
+@media only screen and (max-height: 500px) {
+  .homeBanner {
+    flex-grow: 0.75;
   }
 }
