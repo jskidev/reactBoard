@@ -8,11 +8,13 @@ function Home() {
   const [panel2Visible, setpanel2Visible] = useState(false);
   const [panel3Visible, setpanel3Visible] = useState(false);
   const [scrollToTopVisible, setScrollToTopVisible] = useState(false);
+  const [reachedScroll, setReachedScroll] = useState(false);
 
   const handleScroll = () => {
     const currentScrollPos = window.pageYOffset;
     setpanel1Visible(panel1Visible ? true : currentScrollPos > 240);
     setScrollToTopVisible(currentScrollPos > 240);
+    setReachedScroll(reachedScroll ? true : currentScrollPos > 200);
     setpanel2Visible(panel2Visible ? true : currentScrollPos > 580);
     setpanel3Visible(panel3Visible ? true : currentScrollPos > 850);
   };
@@ -117,7 +119,7 @@ function Home() {
         </div>
       </div>
     </div>
-      <svg title="Go to top" onClick={handleGoToTop} style={{visibility:scrollToTopVisible ? 'visible' : 'hidden'}} className="upArrow" height="40" viewBox="0 0 21 21" width="40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#2A2E3B" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)"><polyline points="7.324 1.661 7.324 7.318 1.647 7.339" transform="scale(1 -1) rotate(45 15.35 0)"/><line x1="4.5" x2="4.5" y1=".5" y2="13.5"/></g></svg>
+      <svg onClick={handleGoToTop} style={{visibility:reachedScroll ? 'visible' : 'hidden'}} className={scrollToTopVisible ? 'upArrow visible' : 'upArrow hidden'} height="40" viewBox="0 0 21 21" width="40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#2A2E3B" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)"><polyline points="7.324 1.661 7.324 7.318 1.647 7.339" transform="scale(1 -1) rotate(45 15.35 0)"/><line x1="4.5" x2="4.5" y1=".5" y2="13.5"/></g></svg>
     </div>
   );
 }
