@@ -117,7 +117,7 @@ nav a:visited {
 }
 
 .panelContent {
-  padding: 5rem 2rem;
+  padding: 3.5rem 2rem;
   width: 350px;
   display: flex;
 }
@@ -193,10 +193,43 @@ nav a:visited {
   width: 100%;
 }
 
-.panelHeader img {
+.panelHeader svg {
   animation-duration: 3s;
   animation-name: arrowDown;
   animation-iteration-count:infinite;
+}
+
+.downArrow {
+  border-radius: 20px;
+  padding: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 10px 20px rgba(0,0,0,0.24);
+}
+
+.downArrow:hover {
+  background-color: #7856FF;
+}
+
+.downArrow:hover g {
+  stroke: #FFFFFF;
+}
+
+.upArrow {
+  border-radius: 40px;
+  padding: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 10px 20px rgba(0,0,0,0.24);
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  background-color: #FFFFFF;
+}
+
+.upArrow:hover {
+  background-color: #7856FF;
+}
+
+.upArrow:hover g {
+  stroke: #FFFFFF;
 }
 
 @keyframes arrowDown {
@@ -256,6 +289,16 @@ nav a:visited {
 @media only screen and (max-width: 600px) {
   .homeBannerLeft {
     padding: 0rem 1rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .upArrow {
+    padding: 5px;
+    bottom: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
   }
 }
 

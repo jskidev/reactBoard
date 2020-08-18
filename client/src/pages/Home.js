@@ -1,19 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import '../App.css';
-import logo from '../images/jumbotronCrop.png';
-import arrow from '../images/arrowDown.svg';
+import logo from '../images/winner.svg';
 import { motion } from "framer-motion"
 
 function Home() {
   const [panel1Visible, setpanel1Visible] = useState(false);
   const [panel2Visible, setpanel2Visible] = useState(false);
   const [panel3Visible, setpanel3Visible] = useState(false);
+  const [scrollToTopVisible, setScrollToTopVisible] = useState(false);
 
   const handleScroll = () => {
     const currentScrollPos = window.pageYOffset;
     setpanel1Visible(panel1Visible ? true : currentScrollPos > 240);
+    setScrollToTopVisible(currentScrollPos > 240);
     setpanel2Visible(panel2Visible ? true : currentScrollPos > 580);
-    setpanel3Visible(panel3Visible ? true : currentScrollPos > 920);
+    setpanel3Visible(panel3Visible ? true : currentScrollPos > 850);
   };
 
   useEffect(() => {
@@ -26,6 +27,11 @@ function Home() {
 
   const handleClick = () => {
     window.location = '/create'
+  }
+
+  const handleGoToTop = () => {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 
   return (
@@ -45,11 +51,13 @@ function Home() {
             <img alt="" src={logo} />
           </motion.div>
         </div>
-        <motion.div animate={{ translateY: [75, 0], opacity: [0, 1] }} transition={{ ease: "easeOut", delay: 3, duration: 1 }} className="panelHeader">
+        <motion.div animate={{ translateY: [75, 0], opacity: [0, 1] }} transition={{ ease: "easeOut", delay: 3.25, duration: 1 }} className="panelHeader">
           <h3>
             How it works
           </h3>
-          <a href="#HowItWorks"><img alt="Down Arrow" src={arrow} width="30px"/></a>
+          <a href="#HowItWorks">
+            <svg class="downArrow" height="30" viewBox="0 0 21 21" width="30" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#2a2e3b" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)"><path d="m7.328 6.67.001 5.658-5.658-.001" transform="matrix(-.70710678 .70710678 .70710678 .70710678 .965201 -.399799)"/><path d="m4.5.5v13"/></g></svg>
+          </a>
         </motion.div>
     </div>
     
@@ -65,7 +73,7 @@ function Home() {
             Create
           </h3>
           <h4>
-            Create a free online leaderboard in seconds.
+            Create a free online leaderboard.
           </h4>
           <p>
             No app installation required. Simply enter a name and description for your board and any starting participants and scores.
@@ -104,11 +112,12 @@ function Home() {
             Share your leaderboard with anybody.
           </h4>
           <p>
-            Send your shareable or admin link to allow participants to view your board, and admins to edit your board.
+            Send your shareable or admin link to allow participants to view your board, or admins to edit your board.
           </p>
         </div>
       </div>
     </div>
+      <svg title="Go to top" onClick={handleGoToTop} style={{visibility:scrollToTopVisible ? 'visible' : 'hidden'}} className="upArrow" height="40" viewBox="0 0 21 21" width="40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#2A2E3B" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)"><polyline points="7.324 1.661 7.324 7.318 1.647 7.339" transform="scale(1 -1) rotate(45 15.35 0)"/><line x1="4.5" x2="4.5" y1=".5" y2="13.5"/></g></svg>
     </div>
   );
 }
