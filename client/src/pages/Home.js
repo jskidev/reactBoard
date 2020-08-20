@@ -10,6 +10,8 @@ function Home() {
   const [scrollToTopVisible, setScrollToTopVisible] = useState(false);
   const [reachedScroll, setReachedScroll] = useState(false);
 
+  const bodyColour = "#FFFFFF";
+
   const handleScroll = () => {
     const currentScrollPos = window.pageYOffset;
     setpanel1Visible(panel1Visible ? true : currentScrollPos > 240);
@@ -18,6 +20,10 @@ function Home() {
     setpanel2Visible(panel2Visible ? true : currentScrollPos > 580);
     setpanel3Visible(panel3Visible ? true : currentScrollPos > 850);
   };
+
+  useEffect(() => {
+    document.body.style.backgroundColor = bodyColour
+  }, [bodyColour])
 
   useEffect(() => {
     handleScroll(); //Fire function on page load. Will show elements if user refreshes page below the fold.

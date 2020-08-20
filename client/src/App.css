@@ -410,7 +410,7 @@ nav a:visited {
 }
 
 .formWrapper {
-  background-color: #FAFAFA;
+  background-color: #F5F5F5;
   padding: 4rem 0rem;
 }
 
@@ -436,6 +436,12 @@ nav a:visited {
   border: solid 2px #d1d1d1;
   box-shadow: none;
   cursor: default;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /*MEDIA QUERIES*/

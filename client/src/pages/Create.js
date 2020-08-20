@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import './Create.css';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
@@ -62,6 +63,10 @@ class Create extends React.Component {
         let allParticipants = this.state.participants;
         allParticipants.splice(index,1);
         this.setState({participants: [...allParticipants]});
+    }
+
+    componentDidMount() {
+        document.body.style.backgroundColor = "#F5F5F5"
     }
 
     //RENDERER
