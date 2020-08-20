@@ -42,7 +42,8 @@ nav li:hover > a {
 
 nav a {
   text-decoration: none;
-  padding: 2rem
+  padding: 2rem;
+  color: black;
 }
 
 nav a:visited {

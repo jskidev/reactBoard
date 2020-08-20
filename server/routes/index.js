@@ -53,7 +53,7 @@ router.post('/api/edit/:id', async (req, res) => {
     if(req.body['participants'].length){
         for(var i = 0 ; i < req.body['participants'].length ; i ++){
             req.body['participants'][i].name = sanitizeString(req.body['participants'][i].name);
-            req.body['participants'][i].score = sanitizeString(req.body['participants'][i].score);
+            req.body['participants'][i].score = sanitizeString(req.body['participants'][i].score.toString());
         }
     }
     var o_id = new ObjectId.ObjectID(req.body.id);

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import {useParams} from 'react-router-dom';
+import socketIOClient from "socket.io-client";
+const ENDPOINT = "http://localhost:8000/"; //DEVELOPMENT
+// const ENDPOINT = window.location.origin // PRODUCTION; 
 //const axios = require('axios');
 
 function View() {
@@ -9,14 +12,23 @@ function View() {
     let { id } = useParams();
 
     useEffect(() => {
+        const socket = socketIOClient(ENDPOINT);
+        socket.on("refreshData", data => {
+            data.participants.sort(function(a, b){
+                return a.score-b.score
+            }).reverse()
+            setBoard(data);
+        });
+    }, []);
+
+    useEffect(() => {
         fetch('http://localhost:8000/api/view/'+id) //DEVELOPMENT
         //fetch(window.location.origin+'/api/view/'+id) //PRODUCTION
         .then(async res => {
             //console.log(res);
             return await res.json()
         })
-        .then(result => { 
-            console.log(result);
+        .then(result => {
             if(result.length > 0){
                 result[0].participants.sort(function(a, b){
                     return a.score-b.score
