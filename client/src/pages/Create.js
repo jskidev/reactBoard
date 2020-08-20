@@ -68,36 +68,62 @@ class Create extends React.Component {
     render() {
         return (
             <>
-                <h2>Create New Board</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name:
-                        <input type="text" required value={this.state.boardName} onChange={this.handleNameChange} />
-                    </label>
-                    <label>
-                        Description:
-                        <input type="text" required value={this.state.boardDescription} onChange={this.handleDescriptionChange} />
-                    </label>
-                    {
-                        this.state.participants.map(
-                            (item, index) => ( 
-                                <>
+                <div className="jumbotron">
+                    <h2>Create Your New Board</h2>
+                </div>
+                <div className="formWrapper">
+                    <div className="form">
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="formHeader">
+                                <h3>Details</h3>
+                                <div className="wrapper">
                                     <label>
-                                        Participant Name:
-                                        <input type="text" required value={item.name} onChange={this.handleParticipantNameChange.bind(this, index)} />
+                                        <h4>Name</h4>
+                                        <input placeholder="Board name" type="text" required value={this.state.boardName} onChange={this.handleNameChange} />
                                     </label>
                                     <label>
-                                        Participant Starting Score:
-                                        <input type="number" required value={item.score} onChange={this.handleParticipantScoreChange.bind(this, index)} />
+                                        <h4>Description</h4>
+                                        <input placeholder="Board description" type="text" required value={this.state.boardDescription} onChange={this.handleDescriptionChange} />
                                     </label>
-                                    <button type="button" title="Delete participant" onClick={this.deleteParticipant.bind(this, index)}>x</button>
-                                </>
-                            )
-                        )
-                    }
-                    <button type="button" onClick={this.addParticipant}>Add Participant</button>
-                    <button type="submit" value="Submit">Submit </button>
-                </form>
+                                </div>
+                            </div>
+                            {
+                                this.state.participants.length > 0 ? 
+                                <div className="participants">
+                                    <h3>Participants</h3>
+                                {
+                                    this.state.participants.map(
+                                        (item, index) => ( 
+                                            <div key={index} className="visible">
+                                                <div className="nameWrapper">
+                                                    <label>
+                                                        <h4>Participant {index + 1} Name</h4>
+                                                        <input placeholder="Name" type="text" required value={item.name} onChange={this.handleParticipantNameChange.bind(this, index)} />
+                                                    </label>
+                                                </div>
+                                                <div className="scoreWrapper">
+                                                    <label>
+                                                        <h4>Participant {index + 1} Starting Score</h4>
+                                                        <input placeholder="Participant score" type="number" required value={item.score} onChange={this.handleParticipantScoreChange.bind(this, index)} />
+                                                        <button type="button" title="Delete participant" onClick={this.deleteParticipant.bind(this, index)}>
+                                                            x
+                                                        </button>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        )
+                                    )
+                                }
+                                </div>
+                                : ''
+                            }
+                            <div className="formFooter">
+                                <button className ="secondaryButton" type="button" disabled={this.state.participants.length >= 100} onClick={this.addParticipant}>ADD PARTICIPANT</button>
+                                <button className="altPrimaryButton" type="submit" value="Submit">CREATE BOARD</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </>
         );
     }
