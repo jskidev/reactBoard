@@ -101,15 +101,15 @@ class Create extends React.Component {
                                         (item, index) => ( 
                                             <div key={index} className="visible">
                                                 <div className="nameWrapper">
-                                                    <label>
+                                                    <label className="labelWrapper">
                                                         <h4>Participant {index + 1} Name</h4>
                                                         <input placeholder="Name" type="text" required value={item.name} onChange={this.handleParticipantNameChange.bind(this, index)} />
                                                     </label>
                                                 </div>
                                                 <div className="scoreWrapper">
-                                                    <label>
-                                                        <h4>Participant {index + 1} Starting Score</h4>
-                                                        <input placeholder="Participant score" type="number" required value={item.score} onChange={this.handleParticipantScoreChange.bind(this, index)} />
+                                                    <label className="labelWrapper">
+                                                        <h4>Participant {index + 1} Score</h4>
+                                                        <input placeholder="Participant score" type="number" min="0" required value={item.score} onChange={this.handleParticipantScoreChange.bind(this, index)} />
                                                         <button type="button" title="Delete participant" onClick={this.deleteParticipant.bind(this, index)}>
                                                             x
                                                         </button>

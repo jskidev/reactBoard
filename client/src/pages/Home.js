@@ -64,7 +64,7 @@ function Home() {
             How it works
           </h3>
           <a href="#HowItWorks">
-            <svg class="downArrow" height="30" viewBox="0 0 21 21" width="30" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#2a2e3b" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)"><path d="m7.328 6.67.001 5.658-5.658-.001" transform="matrix(-.70710678 .70710678 .70710678 .70710678 .965201 -.399799)"/><path d="m4.5.5v13"/></g></svg>
+            <svg class="downArrow" height="30" viewBox="0 0 21 21" width="30" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#7856ff" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)"><path d="m7.328 6.67.001 5.658-5.658-.001" transform="matrix(-.70710678 .70710678 .70710678 .70710678 .965201 -.399799)"/><path d="m4.5.5v13"/></g></svg>
           </a>
         </motion.div>
     </div>
@@ -125,7 +125,7 @@ function Home() {
         </div>
       </div>
     </div>
-      <svg onClick={handleGoToTop} style={{visibility:reachedScroll ? 'visible' : 'hidden'}} className={scrollToTopVisible ? 'upArrow visible' : 'upArrow hidden'} height="40" viewBox="0 0 21 21" width="40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#2A2E3B" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)"><polyline points="7.324 1.661 7.324 7.318 1.647 7.339" transform="scale(1 -1) rotate(45 15.35 0)"/><line x1="4.5" x2="4.5" y1=".5" y2="13.5"/></g></svg>
+      <svg onClick={handleGoToTop} style={{visibility:reachedScroll ? 'visible' : 'hidden'}} className={scrollToTopVisible ? 'upArrow visible' : 'upArrow hidden'} height="40" viewBox="0 0 21 21" width="40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#7856ff" stroke-linecap="round" stroke-linejoin="round" transform="translate(6 4)"><polyline points="7.324 1.661 7.324 7.318 1.647 7.339" transform="scale(1 -1) rotate(45 15.35 0)"/><line x1="4.5" x2="4.5" y1=".5" y2="13.5"/></g></svg>
     </div>
   );
 }
