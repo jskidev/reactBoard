@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import '../App.css';
 import my404 from '../images/emptyStreet.svg';
-import { motion } from "framer-motion"
 
 function My404() {
   return (

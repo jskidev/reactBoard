@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from 'react-router-dom';
 import Create from './pages/Create'
 import Home from './pages/Home'
@@ -42,7 +43,8 @@ function App() {
           <Route path="/view/:id" children={<View />} />
           <Route path="/edit/:id" children={<Edit />} />
           <Route path="/board/:id" children={<Board />} />
-          <Route path='*' exact children={<My404 />} />
+          <Route path='/404' exact children={<My404 />} />
+          <Redirect to="/404" />
         </Switch>
       </div>
     </Router>

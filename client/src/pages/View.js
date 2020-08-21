@@ -63,12 +63,22 @@ function View() {
                     <button type="button" className="secondaryButton" onClick={handleClick}>Edit Board</button>
                     <button type="button" className="altPrimaryButton">SHARE BOARD</button>
                 </div>
-                <div className="form">
+                <div className="form board">
                     { !hasLoaded ? 'Loading' :
                         board.participants.length > 0 ?
                         board.participants.map(
                             (item, index) => ( 
-                                <motion.div animate={{ translateY: [25, 0], opacity: [0, 1] }} transition={{ ease: "easeOut", duration: 2, delay: index/10 }}>{index + 1}<strong>{item.name}</strong>{item.score}</motion.div>
+                                <motion.div className="boardRow" animate={{ translateY: [25, 0], opacity: [0, 1] }} transition={{ ease: "easeOut", duration: 2, delay: index/10 }}>
+                                    <div className={"position rank-"+(index+1)}>
+                                        {index + 1}
+                                    </div>
+                                    <div className="name">
+                                        <strong>{item.name}</strong>
+                                    </div>
+                                    <div className="score">
+                                        {item.score}
+                                    </div>
+                                </motion.div>
                             )
                         )
                         : 

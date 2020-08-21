@@ -1,7 +1,6 @@
 import React from 'react';
 import '../App.css';
 import './Create.css';
-import { motion } from 'framer-motion';
 import axios from 'axios';
 
 class Create extends React.Component {
