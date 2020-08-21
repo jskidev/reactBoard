@@ -239,6 +239,12 @@ input::-webkit-inner-spin-button {
     .formHeader {
         padding-right: 1rem;
     }
+    body {
+        background-color: #FFFFFF;
+    }
+    .jumbotron {
+        padding: 3rem 1rem;
+    }
 }
 
 @media only screen and (max-width: 500px) {

@@ -20,9 +20,11 @@ app.get('*', (req, res) => {
 });
 
 io.on('connection', (socket) => {
+    console.log("New client connected");
     socket.on('refreshData', (msg) => {
         io.emit('refreshData', msg);
       });
+    socket.on("disconnect", () => console.log("Client disconnected"));
 });
 
 let port = process.env.PORT

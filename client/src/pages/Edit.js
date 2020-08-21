@@ -17,6 +17,15 @@ function Edit() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        const socket = socketIOClient(ENDPOINT);
+            socket.emit('refreshData', 
+            {
+                title: boardName,
+                description: boardDescription,
+                participants: participants,
+                id: board.id
+            } 
+        );
         axios({
             method: 'post',
             url: 'http://localhost:8000/api/edit/'+id, //DEVELOPMENT
@@ -29,15 +38,6 @@ function Edit() {
             }
           })
         .then(function (response) {
-            const socket = socketIOClient(ENDPOINT);
-            socket.emit('refreshData', 
-            {
-                title: boardName,
-                description: boardDescription,
-                participants: participants,
-                id: board.id
-            } 
-            );
             window.location = window.location.origin+'/view/'+id
         })
         .catch(function (error) {
@@ -48,6 +48,7 @@ function Edit() {
     }
 
     useEffect(() => {
+        document.body.style.backgroundColor = "#F5F5F5"
         fetch('http://localhost:8000/api/view/'+id) //DEVELOPMENT
         //fetch(window.location.origin+'/api/view/'+id) //PRODUCTION
         .then(async res => {
@@ -72,35 +73,67 @@ function Edit() {
     }, [id]);
 
     return (
-        <div>
-            { !hasLoaded ? 'Loading' :
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <label>
-                    Name:
-                    <input type="text" required value={boardName} onChange={e => setBoardName(e.target.value)} />
-                </label>
-                <label>
-                    Description:
-                    <input type="text" required value={boardDescription} onChange={e => setBoardDescription(e.target.value)} />
-                </label>
-                {participants.map((item, index) => (
-                    <>
-                    <label>
-                        Participant Name:
-                        <input key={index} value={item.name}  onChange={e => { participants[index].name = e.target.value; setParticipants([...participants]); }} />
-                    </label>
-                    <label>
-                        Participant Score:
-                        <input key={index} value={item.score}  onChange={e => { participants[index].score = e.target.value; setParticipants([...participants]); }} />
-                    </label>
-                    <button type="button" title="Delete participant" onClick={e => { participants.splice(index, 1); setParticipants([...participants]); }}>x</button>
-                    </>
-                ))}
-                <button type="button" onClick={e => { participants.push({name:'', score:0}); setParticipants([...participants]); }}>Add Participant</button>
-                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} type="submit" value="Submit">Submit </motion.button>
-            </form>
-            }
-        </div>
+        <>
+            <div className="jumbotron">
+                <h2>Edit Your Board</h2>
+                <p>All changes you make here will be instantly available to anyone viewing your board.</p>
+            </div>
+            <div className="formWrapper">
+                <div className="form">
+                { !hasLoaded ? 'Loading' :
+                    <form onSubmit={(e) => handleSubmit(e)}>
+                        <div className="formHeader">
+                            <h3>Details</h3>
+                            <div className="wrapper">
+                                <label>
+                                    <h4>Name</h4>
+                                    <input placeholder="Board name" type="text" required value={boardName} onChange={e => setBoardName(e.target.value)} />
+                                </label>
+                                <label>
+                                    <h4>Description</h4>
+                                    <input placeholder="Board description" type="text" required value={boardDescription} onChange={e => setBoardDescription(e.target.value)} />
+                                </label>
+                            </div>
+                        </div>
+                        {  
+                            participants.length > 0 ? 
+                            <div className="participants">
+                                <h3>Participants</h3>
+                            {
+                                participants.map(
+                                    (item, index) => ( 
+                                        <div key={index} className="visible">
+                                            <div className="nameWrapper">
+                                                <label className="labelWrapper">
+                                                    <h4>Participant {index + 1} Name</h4>
+                                                    <input placeholder="Name" type="text" required value={item.name} onChange={e => { participants[index].name = e.target.value; setParticipants([...participants]); }} />
+                                                </label>
+                                            </div>
+                                            <div className="scoreWrapper">
+                                                <label className="labelWrapper">
+                                                    <h4>Participant {index + 1} Score</h4>
+                                                    <input placeholder="Participant score" type="number" min="0" required value={item.score} onChange={e => { participants[index].score = e.target.value; setParticipants([...participants]); }} />
+                                                    <button type="button" title="Delete participant" onClick={e => { participants.splice(index, 1); setParticipants([...participants]); }}>
+                                                        x
+                                                    </button>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    )
+                                )
+                            }
+                            </div>
+                            : ''
+                        }
+                        <div className="formFooter">
+                            <button className ="secondaryButton" type="button" disabled={participants.length >= 100} onClick={e => { participants.push({name:'', score:0}); setParticipants([...participants]); }}>Add Participant</button>
+                            <button className="altPrimaryButton" type="submit" value="Submit">SAVE BOARD</button>
+                        </div>
+                    </form>
+                }
+                </div>
+            </div>
+        </>
     );
 }
 
