@@ -56,7 +56,7 @@ function Home() {
             </motion.button>
           </motion.div>
           <motion.div animate={{ translateX: [150, 0], opacity: [0, 1] }} transition={{ ease: "easeOut", duration: 2 }} className="homeBannerRight">
-            <img alt="" src={logo} />
+            <img alt="Two people cheering next to trophy" src={logo} />
           </motion.div>
         </div>
         <motion.div animate={{ translateY: [75, 0], opacity: [0, 1] }} transition={{ ease: "easeOut", delay: 3.25, duration: 1 }} className="panelHeader">
@@ -120,7 +120,7 @@ function Home() {
             Share your leaderboard with anybody.
           </h4>
           <p>
-            Send your shareable or admin link to allow participants to view your board, or admins to edit your board.
+            Send your shareable link to allow participants to view your board, or send your adming link to allow admins to edit your board.
           </p>
         </div>
       </div>

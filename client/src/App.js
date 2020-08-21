@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import View from './pages/View'
 import Edit from './pages/Edit'
 import Board from './pages/Board'
+import My404 from './pages/My404'
 import './App.css';
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
           </nav>
         </header>
         <Switch>
-        <Route exact path="/">
+          <Route exact path="/">
             <Home />
           </Route>
           <Route path="/create">
@@ -41,6 +42,7 @@ function App() {
           <Route path="/view/:id" children={<View />} />
           <Route path="/edit/:id" children={<Edit />} />
           <Route path="/board/:id" children={<Board />} />
+          <Route path='*' exact children={<My404 />} />
         </Switch>
       </div>
     </Router>

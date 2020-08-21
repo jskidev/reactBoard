@@ -5,8 +5,9 @@ import './View.css';
 import {useParams} from 'react-router-dom';
 import socketIOClient from "socket.io-client";
 import { motion } from "framer-motion"
+import empty from '../images/emptyBox.svg';
 const ENDPOINT = "http://localhost:8000/"; //DEVELOPMENT
-// const ENDPOINT = window.location.origin // PRODUCTION; 
+// const ENDPOINT = window.location.origin // PRODUCTION;
 //const axios = require('axios');
 
 function View() {
@@ -64,11 +65,17 @@ function View() {
                 </div>
                 <div className="form">
                     { !hasLoaded ? 'Loading' :
+                        board.participants.length > 0 ?
                         board.participants.map(
                             (item, index) => ( 
                                 <motion.div animate={{ translateY: [25, 0], opacity: [0, 1] }} transition={{ ease: "easeOut", duration: 2, delay: index/10 }}>{index + 1}<strong>{item.name}</strong>{item.score}</motion.div>
                             )
                         )
+                        : 
+                        <div className="empty">
+                            <h3>No participants have been added to this board.</h3>
+                            <img alt="Man carrying empty box" width="75%" src={empty} />
+                        </div>
                     }
                 </div>
             </div>
