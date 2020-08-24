@@ -204,6 +204,7 @@ nav a:visited {
   border-radius: 20px;
   padding: 5px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 10px 20px rgba(0,0,0,0.24);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 10px 20px rgba(0,0,0,0.24);
 }
 
 .downArrow:hover {
