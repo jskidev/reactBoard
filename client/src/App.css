@@ -10,6 +10,7 @@ nav {
 nav span {
   width: 25%;
   padding: 2rem 0rem;
+  z-index: 1;
 }
 
 nav p {
@@ -31,7 +32,7 @@ nav li {
   display: inline;
 }
 
-nav a:hover {
+nav ul a:hover {
   background-color: #7856FF;
   cursor: pointer;
 }
@@ -331,6 +332,9 @@ nav a:visited {
   nav ul {
     padding: 2rem 0rem;
     text-align: right;
+  }
+  nav span a {
+    padding: 0;
   }
 }
 

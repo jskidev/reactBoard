@@ -21,7 +21,7 @@ function App() {
         <header>
           <nav>
             <span>
-              <p>LeadTheBoard</p>
+              <p><Link to="/">LeadTheBoard</Link></p>
             </span>
             <ul>
               <li>
