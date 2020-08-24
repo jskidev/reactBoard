@@ -18,7 +18,7 @@ function Home() {
     setScrollToTopVisible(currentScrollPos > 240);
     setReachedScroll(reachedScroll ? true : currentScrollPos > 200);
     setpanel2Visible(panel2Visible ? true : currentScrollPos > 580);
-    setpanel3Visible(panel3Visible ? true : currentScrollPos > 800);
+    setpanel3Visible(panel3Visible ? true : currentScrollPos > 780);
   };
 
   useEffect(() => {
