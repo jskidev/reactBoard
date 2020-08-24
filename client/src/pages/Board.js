@@ -30,7 +30,7 @@ function Board() {
     useEffect(() => {
         document.body.style.backgroundColor = "#F5F5F5"
         //fetch('http://localhost:8000/api/board/'+id) //DEVELOPMENT
-        fetch(window.location.origin+'/api/view/'+id) //PRODUCTION
+        fetch(window.location.origin+'/api/board/'+id) //PRODUCTION
         .then(async res => {
             //console.log(res);
             return await res.json()
