@@ -7,7 +7,7 @@ class Create extends React.Component {
     //CONSTRUCTOR
     constructor(props) {
         super(props);
-        this.state = {boardName: '', boardDescription: '', participants: []};
+        this.state = {boardName: '', boardDescription: '', participants: [], isSubmitted: false};
     
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
@@ -24,10 +24,11 @@ class Create extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
+        this.setState({isSubmitted: true})
         axios({
             method: 'post',
-            url: 'http://localhost:8000/api/create',    //DEVELOPMENT
-            //url: window.location.origin+'/api/create',  //PRODUCTION
+            //url: 'http://localhost:8000/api/create',    //DEVELOPMENT
+            url: window.location.origin+'/api/create',  //PRODUCTION
             data: {
               boardName: this.state['boardName'],
               boardDescription: this.state['boardDescription'],
@@ -39,7 +40,7 @@ class Create extends React.Component {
         })
         .catch(function (error) {
             console.log(error);
-            
+            this.setState({isSubmitted: false})
         })
         .finally()
     }
@@ -122,8 +123,18 @@ class Create extends React.Component {
                                 : ''
                             }
                             <div className="formFooter">
-                                <button className ="secondaryButton" type="button" disabled={this.state.participants.length >= 100} onClick={this.addParticipant}>ADD PARTICIPANT</button>
-                                <button className="altPrimaryButton" type="submit" value="Submit">CREATE BOARD</button>
+                                {
+                                    !this.state.isSubmitted ?
+                                    <button className ="secondaryButton" type="button" disabled={this.state.participants.length >= 100} onClick={this.addParticipant}>ADD PARTICIPANT</button>
+                                    : ''
+                                }
+                                <button style={{color: this.state.isSubmitted ? '#7856FF' : '#FFFFFF'}} disabled={this.state.isSubmitted} className="altPrimaryButton" type="submit" value="Submit">
+                                    {
+                                        this.state.isSubmitted ?
+                                        <span class="spinner"></span>
+                                        : 'CREATE BOARD'
+                                    }
+                                </button>
                             </div>
                         </form>
                     </div>

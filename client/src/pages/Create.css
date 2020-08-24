@@ -20,6 +20,13 @@ header {
   
 .jumbotron h2 {
     font-weight: 400;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.jumbotron p {
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
   
 .altPrimaryButton {

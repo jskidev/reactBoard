@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import {useParams} from 'react-router-dom';
 import socketIOClient from "socket.io-client";
-const ENDPOINT = "http://localhost:8000/"; //DEVELOPMENT
-// const ENDPOINT = window.location.origin // PRODUCTION; 
+//const ENDPOINT = "http://localhost:8000/"; //DEVELOPMENT
+const ENDPOINT = window.location.origin // PRODUCTION; 
 const axios = require('axios');
 
 function Edit() {
@@ -12,10 +12,12 @@ function Edit() {
     const [boardName, setBoardName] = useState('');
     const [boardDescription, setBoardDescription] = useState('');
     const [participants, setParticipants] = useState([]);
+    const [isSubmitted, setIsSubmitted] = useState(false);
     let { id } = useParams();
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setIsSubmitted(true)
         const socket = socketIOClient(ENDPOINT);
             socket.emit('refreshData', 
             {
@@ -27,8 +29,8 @@ function Edit() {
         );
         axios({
             method: 'post',
-            url: 'http://localhost:8000/api/edit/'+id, //DEVELOPMENT
-            //url: window.location.origin+'/api/edit/'+id  //PRODUCTION
+            //url: 'http://localhost:8000/api/edit/'+id, //DEVELOPMENT
+            url: window.location.origin+'/api/edit/'+id,  //PRODUCTION
             data: {
               boardName: boardName,
               boardDescription: boardDescription,
@@ -41,15 +43,15 @@ function Edit() {
         })
         .catch(function (error) {
             console.log(error);
-            
+            setIsSubmitted(false)
         })
         .finally()
     }
 
     useEffect(() => {
         document.body.style.backgroundColor = "#F5F5F5"
-        fetch('http://localhost:8000/api/view/'+id) //DEVELOPMENT
-        //fetch(window.location.origin+'/api/view/'+id) //PRODUCTION
+        //fetch('http://localhost:8000/api/view/'+id) //DEVELOPMENT
+        fetch(window.location.origin+'/api/view/'+id) //PRODUCTION
         .then(async res => {
             //console.log(res);
             return await res.json()
@@ -125,8 +127,18 @@ function Edit() {
                             : ''
                         }
                         <div className="formFooter">
-                            <button className ="secondaryButton" type="button" disabled={participants.length >= 100} onClick={e => { participants.push({name:'', score:0}); setParticipants([...participants]); }}>Add Participant</button>
-                            <button className="altPrimaryButton" type="submit" value="Submit">SAVE BOARD</button>
+                            {
+                                !isSubmitted ?
+                                <button className ="secondaryButton" type="button" disabled={participants.length >= 100} onClick={e => { participants.push({name:'', score:0}); setParticipants([...participants]); }}>Add Participant</button>
+                                : ''
+                            }
+                            <button style={{color: isSubmitted ? '#7856FF' : '#FFFFFF'}} disabled={isSubmitted} className="altPrimaryButton" type="submit" value="Submit">
+                                {
+                                    isSubmitted ?
+                                    <span class="spinner"></span>
+                                    : 'SAVE BOARD'
+                                }
+                            </button>
                         </div>
                     </form>
                 }

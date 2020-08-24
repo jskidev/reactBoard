@@ -4,15 +4,16 @@ import './Create.css';
 import './View.css';
 import {useParams} from 'react-router-dom';
 import socketIOClient from "socket.io-client";
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import empty from '../images/emptyBox.svg';
-const ENDPOINT = "http://localhost:8000/"; //DEVELOPMENT
-// const ENDPOINT = window.location.origin // PRODUCTION;
+//const ENDPOINT = "http://localhost:8000/"; //DEVELOPMENT
+const ENDPOINT = window.location.origin // PRODUCTION;
 //const axios = require('axios');
 
 function View() {
     const [board, setBoard] = useState({});
     const [hasLoaded, setHasLoaded] = useState(false);
+    const [viewModal, setViewModal] = useState(false);
     let { id } = useParams();
 
     useEffect(() => {
@@ -30,8 +31,8 @@ function View() {
     useEffect(() => {
         document.body.style.backgroundColor = "#F5F5F5"
         document.getElementsByClassName('formWrapper')[0].style.padding = 0;
-        fetch('http://localhost:8000/api/view/'+id) //DEVELOPMENT
-        //fetch(window.location.origin+'/api/view/'+id) //PRODUCTION
+        //fetch('http://localhost:8000/api/view/'+id) //DEVELOPMENT
+        fetch(window.location.origin+'/api/view/'+id) //PRODUCTION
         .then(async res => {
             //console.log(res);
             return await res.json()
@@ -52,6 +53,17 @@ function View() {
         window.location = window.location.origin+'/edit/'+board.id
     }
 
+    const handleShareClick = () => {
+        setViewModal(!viewModal)
+        if(!viewModal){
+            document.body.style.height = "100vh"
+            document.body.style.overflowY = "hidden"
+        } else {
+            document.body.style.height = "inherit"
+            document.body.style.overflowY = "inherit"
+        }
+    }
+
     return (
         <>
             <div className="jumbotron">
@@ -61,7 +73,7 @@ function View() {
             <div className="formWrapper">
                 <div className="buttonWrapper">
                     <button type="button" className="secondaryButton" onClick={handleClick}>Edit Board</button>
-                    <button type="button" className="altPrimaryButton">SHARE BOARD</button>
+                    <button type="button" className="altPrimaryButton" onClick={handleShareClick}>SHARE BOARD</button>
                 </div>
                 <div className="form board">
                     { !hasLoaded ? 'Loading' :
@@ -89,6 +101,25 @@ function View() {
                     }
                 </div>
             </div>
+            {
+                viewModal &&
+                <div className="modalOverlay">
+                <motion.div style={{opacity: viewModal ? 0 : 1}} className="modal" animate={{ translateY: [25, 0], opacity: [0, 1] }} transition={{ ease: "easeOut", duration: 1 }}>
+                    <h1>Share</h1>
+                    <div className="modalBody">
+                        <p>Share this link to allow <strong>read-only</strong> access to your board. Anybody with this link will be able to view live updates to this board, but cannot edit it.</p>
+                        <div className="alert">
+                            {window.location.origin + '/board/' + board.sid}
+                        </div>
+                        <p>Share this link to allow <strong>admin</strong> access to your board. Anybody with this link will be able to make changes to any part of your board.</p>
+                        <div className="alert">
+                            {window.location.origin + '/view/' + board.id}
+                        </div>
+                        <button className="altPrimaryButton" onClick={handleShareClick} >CLOSE</button>
+                    </div>
+                </motion.div>
+            </div>
+            }
         </>
     );
 }
