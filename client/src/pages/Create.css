@@ -60,6 +60,7 @@ header {
     border-radius: 4px;
     width: 50%;
     border: solid 1px #e0e0e0;
+    -webkit-appearance: none;
 }
   
 .form input:focus {
