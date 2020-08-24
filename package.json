@@ -1,0 +1,13 @@
+{
+    "name": "leadtheboard",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server/server.js",
+    },
+    "engines": {
+      "node": "10.x"
+    }
+  }
+  
